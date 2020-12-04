@@ -32,9 +32,9 @@ jobs:
         run: env | sort
       - name: Get Local git Configuration
         run: |
-          git config --global -l
-          git config --system -l
-          git config --local -l
+          git config --global -l || echo "Could not read global git config"
+          git config --system -l || echo "Could not read system git config"
+          git config --local -l || echo "Could not read local git config"
       - name: Get Local Repo Info
         run: |
           git remote -v
