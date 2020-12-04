@@ -28,5 +28,16 @@ jobs:
       # Runs a single command using the runners shell
       - name: Get Environment Variables
         run: env
+      - name: Get Environment Variables, But Sorted
+        run: env | sort
+      - name: Get Local git Configuration
+        run: |
+          git config --global -l
+          git config --system -l
+          git config --local -l
+      - name: Get Local Repo Info
+        run: |
+          git remote -v
+          git branch --all
       - name: Get Available Tool List
-        run: find /bin /usr/bin /usr/sbin
+        run: find ${PATH//:/ }
