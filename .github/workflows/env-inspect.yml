@@ -32,12 +32,16 @@ jobs:
         run: env | sort
       - name: Get Local git Configuration
         run: |
+          echo "---- Global Git Config ----"
           git config --global -l || echo "Could not read global git config"
+          echo "---- System Git Config ----"
           git config --system -l || echo "Could not read system git config"
+          echo "---- Local Git Config ----"
           git config --local -l || echo "Could not read local git config"
       - name: Get Local Repo Info
         run: |
+          set -v
           git remote -v
           git branch --all
       - name: Get Available Tool List
-        run: find ${PATH//:/ }
+        run: "for dir in ${PATH//:/ }; do [[ -d \"$dir\" ]] && find \"$dir\" | sort ; done"
